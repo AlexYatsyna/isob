@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.32112.339
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "lab2", "lab2\lab2.csproj", "{A0A55F15-D185-4F2E-920B-FEBF0411FE5E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "lab2_Client", "lab2_Client\lab2_Client.csproj", "{D4A18CAD-2AE4-4806-BE99-245C4E88CD3D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A0A55F15-D185-4F2E-920B-FEBF0411FE5E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A0A55F15-D185-4F2E-920B-FEBF0411FE5E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A0A55F15-D185-4F2E-920B-FEBF0411FE5E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A0A55F15-D185-4F2E-920B-FEBF0411FE5E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D4A18CAD-2AE4-4806-BE99-245C4E88CD3D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D4A18CAD-2AE4-4806-BE99-245C4E88CD3D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D4A18CAD-2AE4-4806-BE99-245C4E88CD3D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D4A18CAD-2AE4-4806-BE99-245C4E88CD3D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A238543F-B642-43C6-B2E2-F77FC8B51999}
+	EndGlobalSection
+EndGlobal
