@@ -53,8 +53,8 @@ namespace lab2
                                 Time = DateTime.Now,
                                 Key = Config.kCTgs.ToString()
                             };
-
-                            var ticketEncr =/* DES.Encrypt*/CustomConverter<TicketGranting>.Serialize(ticket)/*, Config.kAsTgs)*/;
+                            var temp = CustomConverter<TicketGranting>.Serialize(ticket);
+                            var ticketEncr = DES.Encrypt(DES.Encrypt( temp , Config.kAsTgs),Config.kC);
 
                             var kCTgsEncr = DES.Encrypt(Config.kCTgs, Config.kC);
 

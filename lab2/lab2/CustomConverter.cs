@@ -10,16 +10,14 @@ namespace lab2
 {
     public class CustomConverter <T>
     {
-        public static /*byte[]*/string Serialize(object data)
+        public static string Serialize(object data)
         {
             return JsonConvert.SerializeObject(data).ToString();
-            // var js = JsonConvert.SerializeObject(data);
-            //return Encoding.UTF8.GetBytes(js);
+
         }
 
-        public static T Deserialize(/*byte[]*/ string data)
+        public static T Deserialize( string data)
         {
-            //var js = Encoding.UTF8.GetString(data);
             return JsonConvert.DeserializeObject<T>(data);
         }
 

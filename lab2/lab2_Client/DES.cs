@@ -4,12 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace lab2
+namespace lab2_Client
 {
     public class DES
     {
-        private static int sizeOfBlock = 128;
-        private static int sizeOfChar = 16;
+        private static int sizeOfBlock = 64;
+        private static int sizeOfChar = 8;
         private static int shiftKey = 2;
         private static int quantityOfRounds = 16;
         private static string EncodeKey { get; set; }
@@ -80,7 +80,7 @@ namespace lab2
             else
             {
                 var zeros = new StringBuilder(key);
-                while (key.Length < lengthKey)
+                while (zeros.Length < lengthKey)
                 {
                     zeros.Insert(0,"0");
                 }
@@ -207,13 +207,27 @@ namespace lab2
 
         public static string Decrypt(string input, string key ="")
         {
-            if (key == "")
-                key = DecodeKey;
+            ExpendingStringSize(input);
+
+            CutStringIntoBlocks(input);
+
+            key = ExpendingKey(key, input.Length / (2 * Blocks.Length));
+
             key = StringToBinary(key);
 
+            for (int i = 0; i < quantityOfRounds; i++)
+            {
+
+                key = NextKey(key);
+            }
+
+            key = FromBinaryToString( PrevKey(key));
+
+
+            key = StringToBinary(key);
             input = StringToBinary(input);
 
-            CutBinaryStringIntoBlocks(input);
+
 
             for (int i = 0; i < quantityOfRounds; i++)
             {
@@ -229,8 +243,6 @@ namespace lab2
             {
                 result.Append(FromBinaryToString(Blocks[i].ToString()));
             }
-
-
             return result.ToString();
 
         }

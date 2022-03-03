@@ -7,7 +7,7 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace lab2
+namespace lab2_Client
 {
     public enum MessageType
     {

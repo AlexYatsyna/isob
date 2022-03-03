@@ -28,11 +28,11 @@ namespace lab2
                     if (message.Type == MessageType.CToTgs)
                     {
 
-                        //var tgtJs = DES.Decrypt(message.Data[0], Config.kAsTgs);
-                        var tgt = JsonConvert.DeserializeObject<TicketGranting>(/*tgtJs*/message.Data[0]);
+                        var tgtJs = DES.Decrypt(message.Data[0], Config.kAsTgs);
+                        var tgt = JsonConvert.DeserializeObject<TicketGranting>(tgtJs);
 
-                        //var autJs = DES.Decrypt(message.Data[1], Config.kCTgs);
-                        var aut = JsonConvert.DeserializeObject<TimeMark>(/*autJs*/message.Data[1]);
+                        var autJs = DES.Decrypt(message.Data[1], Config.kCTgs);
+                        var aut = JsonConvert.DeserializeObject<TimeMark>(autJs);
 
                         var id = message.Data[2];
 
@@ -53,7 +53,7 @@ namespace lab2
                                     Key = Config.kCSs
                                 };
 
-                                var ticketEncr =/* DES.Encrypt(*/JsonConvert.SerializeObject(ticket)/*, Config.kTgsSs)*/;
+                                var ticketEncr =DES.Encrypt( DES.Encrypt(JsonConvert.SerializeObject(ticket), Config.kTgsSs),Config.kCTgs);
                                 var kCSsEncr = DES.Encrypt(Config.kCSs, Config.kCTgs);
 
                                 answer.Data.Add(ticketEncr);

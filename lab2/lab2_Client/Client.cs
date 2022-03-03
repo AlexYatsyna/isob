@@ -1,4 +1,5 @@
-﻿using lab2;
+﻿
+using lab2;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -13,7 +14,7 @@ namespace lab2_Client
     class Client
     {
         public string Login { get; set; }
-        private TicketGranting Tgt { get; set; }
+        private string Tgt { get; set; }
         private string Tgs { get; set; }
         private string KCTgs { get; set; }
         private string KCSs { get; set; }
@@ -35,7 +36,7 @@ namespace lab2_Client
             if(KCTgs != null && Tgt!=null)
             {
                 var message = new Message(MessageType.CToTgs);
-                message.Data.Add(CustomConverter<TicketGranting>.Serialize(Tgt));
+                message.Data.Add(Tgt);
 
                 var mark = new TimeMark()
                 { 
@@ -43,7 +44,7 @@ namespace lab2_Client
                     Time = DateTime.Now
                 };
                 var aut = JsonConvert.SerializeObject(mark).ToString();
-                message.Data.Add/*(DES.Encrypt*/(aut/*, KCTgs)*/);
+                message.Data.Add(DES.Encrypt(aut, KCTgs));
                 message.Data.Add("SS_ID");
 
                 message.Send(TgsEP);
@@ -65,8 +66,7 @@ namespace lab2_Client
                     switch (message.Type)
                     {
                         case MessageType.AsToC:
-                            //var tem2 = DES.Decrypt(, Config.kC);
-                            Tgt = CustomConverter<TicketGranting>.Deserialize(message.Data[0]);
+                            Tgt = DES.Decrypt(message.Data[0], Config.kC);
                             KCTgs = DES.Decrypt(message.Data[1], Config.kC);
                             for(int i = KCTgs.Length-1;i>0;i--)
                             {
@@ -81,8 +81,7 @@ namespace lab2_Client
                             
                             break;
                         case MessageType.TgsToC:
-                            //Tgs = DES.Decrypt(message.Data[0], KCTgs);
-                            Tgs = /*DES.Decrypt(*/message.Data[0]/*, KCTgs)*/;
+                            Tgs = DES.Decrypt(message.Data[0], KCTgs);
                             KCSs = DES.Decrypt(message.Data[1], KCTgs);
                             for (int i = KCSs.Length - 1; i > 0; i--)
                             {
@@ -101,20 +100,13 @@ namespace lab2_Client
                             };
                             Time = mark.Time;
                             var aut = JsonConvert.SerializeObject(mark);
-                            locMessage.Data.Add(/*DES.Encrypt(*/aut/*, KCSs)*/);
+                            locMessage.Data.Add(DES.Encrypt(aut, KCSs));
                             locMessage.Send(SsEP);
                             Console.WriteLine("TGS to C successfull");
                             break;
                         case MessageType.SsToC:
-                            var time =/* DES.Decrypt(*/message.Data[0]/*, KCSs)*/;
-                           // for (int i = time.Length - 1; i > 0; i--)
-                            //{
-                            //    if (!time[i].Equals(" "))
-                            //    {
-                            //        time = time.Remove(i);
-                            //        break;
-                            //    }
-                            //}
+                            var time = DES.Decrypt(message.Data[0], KCSs);
+ 
                             var forCheck = JsonConvert.DeserializeObject<long>(time);
                             if (Time.Ticks + 1 == forCheck)
                             {

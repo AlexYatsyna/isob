@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace lab2
@@ -12,6 +13,7 @@ namespace lab2
         {
             //Console.WriteLine(DES.Decrypt(DES.Encrypt("Do you Know {{\\}|What's Fighting for When It's Not Worth Dying for?", "чр3ъ")));
             //Console.ReadKey();
+        
             var authServer = new AuthServer();
             var tgs = new TicketGrantingServer();
             var server = new Server();
@@ -21,6 +23,7 @@ namespace lab2
                 Task.Run(() => authServer.Listen());
                 Task.Run(() => tgs.Listen());
                 Task.Run(() => server.Listen());
+
             }
             catch (Exception ex)
             {
