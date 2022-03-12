@@ -8,7 +8,7 @@ namespace lab2_Client
 {
     static class Config
     {
-        public static readonly string kC = "K_CCCC";
+        public static readonly string kC = "dghfghfs";
 
         public static readonly int cPort = 8000;
         public static readonly int asPort = 8001;

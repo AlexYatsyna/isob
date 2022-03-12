@@ -17,8 +17,6 @@ namespace lab2
         public AuthServer()
         {
             users.Add("alex");
-            users.Add("user");
-            users.Add("anonym");
         }
 
         public void Listen()
@@ -39,7 +37,8 @@ namespace lab2
                     if (message.Type == MessageType.CToAs)
                     {
                         var id = message.Data[0];
-                        Console.WriteLine($"Message from {remoteIp.Address}:{remoteIp.Port} c = {id} to AurhServer");
+                        Console.WriteLine($"Message from {remoteIp.Address}:{remoteIp.Port} AurhServer");
+                        Console.WriteLine($"Client : {id}");
                         if (users.Contains(id))
                         {
                             answer.Type = MessageType.AsToC;
@@ -57,7 +56,7 @@ namespace lab2
                             var ticketEncr = DES.Encrypt(DES.Encrypt( temp , Config.kAsTgs),Config.kC);
 
                             var kCTgsEncr = DES.Encrypt(Config.kCTgs, Config.kC);
-
+                            Console.WriteLine($"Data from AuthServer to Client: \n\n{ticketEncr} \n {kCTgsEncr}\n");
 
                             answer.Data.Add(ticketEncr);
          
@@ -71,10 +70,6 @@ namespace lab2
                             Console.WriteLine("Access denied.");
                         }
                         answer.Send(remoteIp);
-                        using (StreamWriter sw = File.CreateText(Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName + "/output.json"))
-                        {
-                            sw.WriteLine($"Message sended from auth server to {remoteIp.Address}:{remoteIp.Port} ");
-                        }
                         Console.WriteLine($"Message sended from auth server to {remoteIp.Address}:{remoteIp.Port} ");
                     }
                 }

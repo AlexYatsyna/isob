@@ -8,11 +8,11 @@ namespace lab2
 {
     static class Config
     {
-        public static readonly string kC = "K_CCCC";
-        public static readonly string kCTgs = "K_C_TGS";
-        public static readonly string kCSs = "K_C_SS";
-        public static readonly string kAsTgs = "K_AS_TGS";
-        public static readonly string kTgsSs = "K_TGS_SS";
+        public static readonly string kC = "dghfghfs";
+        public static readonly string kCTgs = "dfgdfg";
+        public static readonly string kCSs = "sdfghfg";
+        public static readonly string kAsTgs = "sdffgb";
+        public static readonly string kTgsSs = "aswerwr";
 
         public static readonly int cPort = 8000;
         public static readonly int asPort = 8001;
@@ -21,8 +21,6 @@ namespace lab2
 
         public static readonly TimeSpan asTDur = new TimeSpan(24, 0, 0);
         public static readonly TimeSpan tgsTDur = new TimeSpan(12, 0, 0);
-
-        public static readonly string filepath = @"d:\out.txt";
 
     }
 }

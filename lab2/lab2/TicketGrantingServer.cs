@@ -35,6 +35,7 @@ namespace lab2
                         var aut = JsonConvert.DeserializeObject<TimeMark>(autJs);
 
                         var id = message.Data[2];
+                        Console.WriteLine($"Recieved data from cliet to tgs: \n\n{message.Data[0]} \n {message.Data[1]} \n {message.Data[2]}\n");
 
                         var answer = new Message();
 
@@ -55,6 +56,7 @@ namespace lab2
 
                                 var ticketEncr =DES.Encrypt( DES.Encrypt(JsonConvert.SerializeObject(ticket), Config.kTgsSs),Config.kCTgs);
                                 var kCSsEncr = DES.Encrypt(Config.kCSs, Config.kCTgs);
+                                Console.WriteLine($"Data from TGS to Client : \n\n {ticketEncr} \n {kCSsEncr} \n");
 
                                 answer.Data.Add(ticketEncr);
                                 answer.Data.Add(kCSsEncr);

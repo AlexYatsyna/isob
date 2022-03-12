@@ -34,6 +34,7 @@ namespace lab2
 
                         var autJs = DES.Decrypt(message.Data[1], Config.kCSs);
                         var aut = JsonConvert.DeserializeObject<TimeMark>(autJs);
+                        Console.WriteLine($"Recieved data from cliemt to Service server: \n\n {message.Data[0]} \n {message.Data[1]}\n");
 
                         var answer = new Message();
                         if(DES.CheckTime(tgs.Time, aut.Time, tgs.Duration))
@@ -41,6 +42,7 @@ namespace lab2
                             answer.Type = MessageType.SsToC;
                             var timeJs = JsonConvert.SerializeObject(aut.Time.Ticks + 1);
                             var encr = DES.Encrypt(timeJs, Config.kCSs);
+                            Console.WriteLine($"Data from Service server to client : \n\n {encr}\n");
                             answer.Data.Add(encr);
                         }
                         else
